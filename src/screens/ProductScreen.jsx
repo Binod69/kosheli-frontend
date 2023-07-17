@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import productData from '../productsData';
+import axiosInstance from '../config/axios.config';
 import {
   Col,
   Row,
@@ -11,11 +12,34 @@ import {
 } from 'react-bootstrap';
 import { FaOpencart } from 'react-icons/fa';
 import Rating from '../components/Rating/Rating';
+import apiEndPoints from '../config/api.endpoint';
+import { useCallback } from 'react';
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id: productId } = useParams();
 
-  const product = productData.find((p) => p._id === parseInt(productId));
+  const fetchProduct = useCallback(async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        apiEndPoints.PRODUCTS + '/' + productId
+      );
+      setProduct(data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  }, [productId]);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
+
+  console.log(fetchProduct);
+
   //   console.log(product);
 
   return (
