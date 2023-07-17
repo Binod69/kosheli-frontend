@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import HomePageLayout from './layout/HomePageLayout';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+// import { ThemeContext, themes } from './context/ThemeContext';
+// import { useState } from 'react';
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [theme, setTheme] = useState(themes.light);
 
+  // const handleThemeChange = () => {
+  //   setTheme((prevTheme) =>
+  //     prevTheme === themes.light ? themes.dark : themes.light
+  //   );
+  // };
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<HomePageLayout />}>
+          <Route index element={<HomeScreen />} />
+          <Route path="product/:id" element={<ProductScreen />} />
+        </Route>
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
