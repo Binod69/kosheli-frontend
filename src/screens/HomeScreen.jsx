@@ -1,5 +1,6 @@
 import { useGetProductsQuery } from '../redux/slices/productApi.slice';
 import { Row, Col, Container } from 'react-bootstrap';
+// import { toast } from 'react-hot-toast';
 import Products from '../components/Product/Products';
 
 const HomeScreen = () => {

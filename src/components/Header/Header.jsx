@@ -1,11 +1,10 @@
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-// import { ThemeContext } from '../../context/ThemeContext';
-// import { useContext } from 'react';
 const Header = () => {
-  // const { theme, handleThemeChange } = useContext(ThemeContext);
+  const { cartItem } = useSelector((state) => state.cart);
   return (
     <>
       <header>
@@ -20,6 +19,11 @@ const Header = () => {
                 <LinkContainer to="/cart">
                   <Nav.Link>
                     <FaShoppingCart /> Cart
+                    {cartItem.length > 0 && (
+                      <Badge pill bg="success" className="ms-1">
+                        {cartItem.reduce((a, c) => a + c.qty, 0)}
+                      </Badge>
+                    )}
                   </Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/login">
@@ -32,13 +36,6 @@ const Header = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        {/* <button
-          className="theme-toggle-button"
-          onClick={handleThemeChange}
-          aria-label="Toggle Theme"
-        >
-          {theme === 'dark' ? <FaMoon /> : <FaSun />}
-        </button> */}
       </header>
     </>
   );
