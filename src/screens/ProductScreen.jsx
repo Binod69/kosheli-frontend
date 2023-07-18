@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axiosInstance from '../config/axios.config';
 import {
   Col,
   Row,
@@ -12,35 +10,15 @@ import {
 } from 'react-bootstrap';
 import { FaOpencart } from 'react-icons/fa';
 import Rating from '../components/Rating/Rating';
-import apiEndPoints from '../config/api.endpoint';
-import { useCallback } from 'react';
+import { useGetProductsByIdQuery } from '../redux/slices/productApi.slice';
 
 const ProductScreen = () => {
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { id: productId } = useParams();
-
-  const fetchProduct = useCallback(async () => {
-    try {
-      const { data } = await axiosInstance.get(
-        apiEndPoints.PRODUCTS + '/' + productId
-      );
-      setProduct(data);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  }, [productId]);
-
-  useEffect(() => {
-    fetchProduct();
-  }, [fetchProduct]);
-
-  console.log(fetchProduct);
-
-  //   console.log(product);
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductsByIdQuery(productId);
 
   return (
     <>
@@ -48,60 +26,68 @@ const ProductScreen = () => {
         <Link to="/" className="btn btn-light my-3">
           Go back
         </Link>
-        <Row>
-          <Col md={5}>
-            <Image src={product.image} fluid alt={product.name} />
-          </Col>
-          <Col md={4}>
-            <ListGroup variant="flush">
-              <h3>{product.name}</h3>
-
-              <ListGroup.Item>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
-              </ListGroup.Item>
-              <ListGroup.Item>price: ${product.price}</ListGroup.Item>
-              <ListGroup.Item>
-                description: {product.description}
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col md={3}>
-            <Card className="shadow-sm">
+        {isLoading ? (
+          <h2>loading..</h2>
+        ) : error ? (
+          <div>{error?.data?.message || error?.error}</div>
+        ) : (
+          <Row>
+            <Col md={5}>
+              <Image src={product.image} fluid alt={product.name} />
+            </Col>
+            <Col md={4}>
               <ListGroup variant="flush">
+                <h3>{product.name}</h3>
+
                 <ListGroup.Item>
-                  <Row>
-                    <Col>Price:</Col>
-                    <Col>
-                      <strong>${product.price}</strong>
-                    </Col>
-                  </Row>
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                  />
                 </ListGroup.Item>
+                <ListGroup.Item>price: ${product.price}</ListGroup.Item>
                 <ListGroup.Item>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      <strong>
-                        {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
-                      </strong>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Button
-                    className="btn-block"
-                    type="button"
-                    disabled={product.countInStock === 0}
-                  >
-                    <FaOpencart /> Add to Cart
-                  </Button>
+                  description: {product.description}
                 </ListGroup.Item>
               </ListGroup>
-            </Card>
-          </Col>
-        </Row>
+            </Col>
+            <Col md={3}>
+              <Card className="shadow-sm">
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Price:</Col>
+                      <Col>
+                        <strong>${product.price}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Status:</Col>
+                      <Col>
+                        <strong>
+                          {product.countInStock > 0
+                            ? 'In Stock'
+                            : 'Out Of Stock'}
+                        </strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Button
+                      className="btn-block"
+                      type="button"
+                      disabled={product.countInStock === 0}
+                    >
+                      <FaOpencart /> Add to Cart
+                    </Button>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card>
+            </Col>
+          </Row>
+        )}
       </Container>
     </>
   );
