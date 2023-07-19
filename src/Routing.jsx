@@ -7,6 +7,8 @@ import LoginScreen from './screens/LoginScreen';
 import { Toaster } from 'react-hot-toast';
 import RegisterScreen from './screens/RegisterScreen';
 import './App.css';
+import ShippingScreen from './screens/ShippingScreen';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function Routing() {
   return (
@@ -18,6 +20,10 @@ function Routing() {
           <Route path="cart" element={<CartScreen />} />
           <Route path="login" element={<LoginScreen />} />
           <Route path="register" element={<RegisterScreen />} />
+
+          <Route path="" element={<PrivateRoute />}>
+            <Route path="shipping" element={<ShippingScreen />} />
+          </Route>
         </Route>
       </Routes>
       <Toaster />
