@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import './App.css';
 import ShippingScreen from './screens/ShippingScreen';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PaymentScreen from './screens/PaymentScreen';
 
 function Routing() {
   return (
@@ -23,6 +24,7 @@ function Routing() {
 
           <Route path="" element={<PrivateRoute />}>
             <Route path="shipping" element={<ShippingScreen />} />
+            <Route path="payment" element={<PaymentScreen />} />
           </Route>
         </Route>
       </Routes>
