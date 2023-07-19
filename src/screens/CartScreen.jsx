@@ -13,6 +13,7 @@ import {
 import { FaTrash, FaPaperPlane } from 'react-icons/fa';
 import emptycart from '../../public/images/emptycart.jpg';
 import { addToCart, removerFromCart } from '../redux/slices/cart.slice';
+import { toast } from 'react-hot-toast';
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -31,6 +32,10 @@ const CartScreen = () => {
 
   const removefromCartHandler = async (id) => {
     dispatch(removerFromCart(id));
+    toast.success('Product removed from Cart!', {
+      position: 'top-center',
+      duration: 2000, // The toast will disappear after 2 seconds
+    });
   };
 
   const checkoutHandler = () => {

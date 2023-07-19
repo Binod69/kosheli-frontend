@@ -40,7 +40,7 @@ const ProductScreen = () => {
       })
     );
     navigate('/cart');
-    toast.success('Item added to cart!');
+    toast.success('Product added to cart!');
   };
   return (
     <>

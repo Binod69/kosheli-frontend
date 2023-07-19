@@ -2,11 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import HomePageLayout from './layout/HomePageLayout';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
-
-import './App.css';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import { Toaster } from 'react-hot-toast';
+import './App.css';
 
-function App() {
+function Routing() {
   return (
     <>
       <Routes>
@@ -14,10 +15,12 @@ function App() {
           <Route index element={<HomeScreen />} />
           <Route path="product/:id" element={<ProductScreen />} />
           <Route path="cart" element={<CartScreen />} />
+          <Route path="login" element={<LoginScreen />} />
         </Route>
       </Routes>
+      <Toaster />
     </>
   );
 }
 
-export default App;
+export default Routing;
