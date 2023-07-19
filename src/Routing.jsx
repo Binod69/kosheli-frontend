@@ -5,6 +5,7 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import { Toaster } from 'react-hot-toast';
+import RegisterScreen from './screens/RegisterScreen';
 import './App.css';
 
 function Routing() {
@@ -16,6 +17,7 @@ function Routing() {
           <Route path="product/:id" element={<ProductScreen />} />
           <Route path="cart" element={<CartScreen />} />
           <Route path="login" element={<LoginScreen />} />
+          <Route path="register" element={<RegisterScreen />} />
         </Route>
       </Routes>
       <Toaster />
