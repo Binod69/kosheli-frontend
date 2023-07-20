@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Products from '../components/Product/Products';
-import Loading from '../components/Loading/Loading';
+import HomeScreenLoading from '../components/Loading/HomeScreenLoading';
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -11,7 +11,7 @@ const HomeScreen = () => {
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <HomeScreenLoading />
       ) : error ? (
         <div>{error?.data?.message || error?.error}</div>
       ) : (

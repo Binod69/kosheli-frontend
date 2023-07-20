@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Loading = () => {
+const HomeScreenLoading = () => {
   return (
     <>
       <Container>
@@ -24,4 +24,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default HomeScreenLoading;
