@@ -84,7 +84,11 @@ const ShippingScreen = () => {
               onChange={(e) => setCountry(e.target.value)}
             />
           </Form.Group>
-          <Button type="submit" variant="success" className="my-2">
+          <Button
+            type="submit"
+            variant="success"
+            className="my-2 btn btn-icon-split"
+          >
             Continue
           </Button>
         </Form>
