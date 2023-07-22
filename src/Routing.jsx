@@ -10,6 +10,8 @@ import './App.css';
 import ShippingScreen from './screens/ShippingScreen';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 
 function Routing() {
   return (
@@ -25,6 +27,8 @@ function Routing() {
           <Route path="" element={<PrivateRoute />}>
             <Route path="shipping" element={<ShippingScreen />} />
             <Route path="payment" element={<PaymentScreen />} />
+            <Route path="placeorder" element={<PlaceOrderScreen />} />
+            <Route path="order" element={<OrderScreen />} />
           </Route>
         </Route>
       </Routes>

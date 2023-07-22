@@ -9,7 +9,7 @@ import { logout } from '../../redux/slices/auth.slice';
 const Header = () => {
   const { cartItem } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  console.log('userInfo', userInfo);
+  // console.log('userInfo', userInfo);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ const Header = () => {
   };
   return (
     <>
-      <header>
+      <header className="navContainer">
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
           <Container>
             <LinkContainer to="/">

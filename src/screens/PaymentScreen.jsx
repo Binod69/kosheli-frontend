@@ -9,7 +9,7 @@ import FormContainer from '../components/FormContainer/FormContainer';
 import CheckoutStep from '../components/CheckpoutStep/CheckoutStep';
 import { savePaymentMethod } from '../redux/slices/cart.slice';
 const PaymentScreen = () => {
-  const [payment, setPayment] = useState('');
+  const [payment, setPayment] = useState('PayPal');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const PaymentScreen = () => {
   return (
     <FormContainer>
       <Container>
-        <CheckoutStep animated step1 step2 step3 />
+        <CheckoutStep step1 step2 step3 />
         <h2>Payment Method</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group>

@@ -31,7 +31,7 @@ const ShippingScreen = () => {
       saveShippingAddress({ address, city, postalCode, phoneNumber, country })
     );
     navigate('/payment');
-    console.log('submit');
+    console.log('from shipping screen');
   };
   return (
     <FormContainer>
