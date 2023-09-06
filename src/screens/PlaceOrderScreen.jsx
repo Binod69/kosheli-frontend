@@ -32,7 +32,7 @@ const PlaceOrderScreen = () => {
     e.preventDefault();
     try {
       const res = await createOrder({
-        orderItems: cart.cartItems,
+        orderItems: cart.cartItem,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
@@ -40,8 +40,16 @@ const PlaceOrderScreen = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
-      dispatch(clearCartItems());
-      navigate(`/order/${res._id}`);
+
+      // Check if the response status is "fulfilled" and access the data object
+      if (res.status === 'fulfilled') {
+        const res = res.data;
+        dispatch(clearCartItems());
+        navigate(`/order/${res._id}`);
+      }
+
+      // dispatch(clearCartItems());
+      // navigate(`/order/${res._id}`);
     } catch (err) {
       // Specific error handling if the error object contains an error message
       if (err.message) {
